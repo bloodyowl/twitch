@@ -8,6 +8,7 @@ module Styles = {
   })
   let logoContainer = css({
     "position": "relative",
+    "zIndex": 2,
     "transition": "200ms ease-in-out transform",
   })
   let speakingLogoContainer = cx([

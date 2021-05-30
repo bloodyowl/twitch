@@ -26,6 +26,20 @@ let make = (
     ""
   }
   let actualHref = Router.makeHref(href) ++ queryString
+
+  let onClick = React.useCallback2(event => {
+    switch (ReactEvent.Mouse.metaKey(event), ReactEvent.Mouse.ctrlKey(event)) {
+    | (false, false) =>
+      event->ReactEvent.Mouse.preventDefault
+      Router.push(actualHref)
+    | _ => ()
+    }
+    switch onClick {
+    | Some(onClick) => onClick(event)
+    | None => ()
+    }
+  }, (actualHref, onClick))
+
   <a
     ?onMouseEnter
     ?onMouseLeave
@@ -40,18 +54,7 @@ let make = (
     | (None, Some(b)) => Some(b)
     | (None, None) => None
     }}
-    onClick={event => {
-      switch (ReactEvent.Mouse.metaKey(event), ReactEvent.Mouse.ctrlKey(event)) {
-      | (false, false) =>
-        event->ReactEvent.Mouse.preventDefault
-        Router.push(actualHref)
-      | _ => ()
-      }
-      switch onClick {
-      | Some(onClick) => onClick(event)
-      | None => ()
-      }
-    }}>
+    onClick={onClick}>
     children
   </a>
 }
