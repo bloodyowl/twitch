@@ -66,6 +66,7 @@ module Styles = {
     "paddingTop": 0,
   })
   let projectContainer = css({
+    "position": "relative",
     "display": "flex",
     "flexDirection": "column",
     "alignItems": "center",
@@ -78,7 +79,16 @@ module Styles = {
     "@media(prefers-color-scheme: dark)": {
       "backgroundColor": "#444",
     },
+  })
+  let projectContents = css({
+    "height": 1,
     "overflowY": "auto",
+    "flexGrow": 1,
+    "display": "flex",
+    "flexDirection": "column",
+    "alignItems": "flex-start",
+    "justifyContent": "flex-start",
+    "alignSelf": "stretch",
   })
   let nothing = css({
     "fontWeight": "700",
@@ -166,7 +176,10 @@ let make = (~localPath, ~queryString, ~projects) => {
       | list{slug} =>
         let project = projects->Array.find(project => project.slug === slug)
         switch project {
-        | Some({render}) => <div className=Styles.projectContainer> {render()} </div>
+        | Some({render}) =>
+          <div className=Styles.projectContainer>
+            <div className=Styles.projectContents> {render()} </div>
+          </div>
         | None => <div className=Styles.nothing> {"Not found"->React.string} </div>
         }
       | list{} => <div className=Styles.nothing> {"Pick a project"->React.string} </div>
