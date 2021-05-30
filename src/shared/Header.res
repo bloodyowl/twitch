@@ -201,7 +201,7 @@ let make = () => {
             className=Styles.navItem
             activeClassName=Styles.activeNavItem
             title>
-            <div> {emoji->React.string} </div>
+            <div ariaHidden=true> {emoji->React.string} </div>
           </Link>
           <Spacer />
         </React.Fragment>

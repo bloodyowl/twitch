@@ -12,8 +12,6 @@ module Styles = {
   let sidebar = css({
     "flexGrow": 0,
     "width": 200,
-    "padding": 10,
-    "paddingTop": 0,
     "display": "flex",
     "flexDirection": "column",
   })
@@ -21,6 +19,8 @@ module Styles = {
     "height": 1,
     "overflowY": "auto",
     "flexGrow": 1,
+    "padding": 10,
+    "paddingTop": 0,
   })
   let project = css({
     "padding": "10px 20px",
@@ -101,6 +101,8 @@ module Styles = {
     "display": "flex",
     "flexDirection": "row",
     "alignItems": "stretch",
+    "paddingLeft": 10,
+    "paddingRight": 10,
   })
   let searchBar = css({
     "flexGrow": 1,
@@ -228,7 +230,7 @@ let make = (~localPath, ~queryString, ~projects) => {
         <nav className=Styles.sidebar>
           <div className=Styles.searchContainer>
             <input
-              autoFocus=true
+              autoFocus={hasEnoughSpaceForSidebar}
               type_="text"
               placeholder=`Search …`
               value={query->Dict.get("search")->Option.getWithDefault("")}
@@ -328,7 +330,9 @@ let make = (~localPath, ~queryString, ~projects) => {
                       className=Styles.stickySidebarOverlay
                       onClick={_ => setIsSidebarOpen(_ => false)}
                     />
-                    <div className=Styles.stickySidebarContainer>
+                    <FocusTrap
+                      className=Styles.stickySidebarContainer
+                      onPressEscape={_ => setIsSidebarOpen(_ => false)}>
                       sidebar
                       <svg
                         className=Styles.stickySidebarPointer
@@ -337,7 +341,7 @@ let make = (~localPath, ~queryString, ~projects) => {
                         height="18">
                         <polygon fill=Theme.mainBackgroundColor points="0 0, 10 0, 5 5" />
                       </svg>
-                    </div>
+                    </FocusTrap>
                   </>
                 : React.null}
               <button className=Styles.stickySidebarAction onClick={_ => setIsSidebarOpen(not)}>
