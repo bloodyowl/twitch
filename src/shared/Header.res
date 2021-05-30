@@ -24,7 +24,7 @@ module Styles = {
     "transform": "translateX(10px)",
     "backgroundColor": speechBackgroundColor,
     "color": "#fff",
-    "padding": 10,
+    "padding": "10px 20px",
     "whiteSpace": "nowrap",
     "borderRadius": 8,
     "pointerEvents": "none",
@@ -96,10 +96,16 @@ module Styles = {
     "animation": `4s infinite linear ${eyesAnimation}`,
     "transformOrigin": "50% 30%",
   })
-  let copyright = css({
-    "textAlign": "right",
-    "padding": 10,
+  let externalLinks = css({
     "alignSelf": "center",
+    "padding": 10,
+    "textAlign": "right",
+  })
+  let github = css({
+    "color": Theme.mainPurple,
+    "textDecoration": "none",
+  })
+  let copyright = css({
     "fontSize": 14,
   })
 }
@@ -186,6 +192,10 @@ let make = () => {
               }, 500)
               timeoutRef.current = Some(timeoutId)
             }}
+            onClick={_ => {
+              clearTimeout()
+              setSpeech(_ => None)
+            }}
             href
             className=Styles.navItem
             activeClassName=Styles.activeNavItem
@@ -197,6 +207,16 @@ let make = () => {
       })
       ->React.array}
     </nav>
-    <div className=Styles.copyright> {`© bloodyowl 2021`->React.string} </div>
+    <div className=Styles.externalLinks>
+      <a
+        className=Styles.github
+        href="https://github.com/bloodyowl/twitch"
+        target="_blank"
+        rel="noopener">
+        {`Source code`->React.string}
+      </a>
+      <Spacer height="5px" />
+      <div className=Styles.copyright> {`© bloodyowl 2021`->React.string} </div>
+    </div>
   </header>
 }

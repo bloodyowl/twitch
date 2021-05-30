@@ -9,8 +9,10 @@ let make = (
   ~matchSubroutes=false,
   ~title=?,
   ~children,
+  ~preserveQueryString=false,
   ~onMouseEnter=?,
   ~onMouseLeave=?,
+  ~onClick=?,
 ) => {
   let url = Router.useUrl()
   let path = url.path->List.reduce("", (acc, item) => acc ++ "/" ++ item)
@@ -18,7 +20,12 @@ let make = (
   let isActive = matchSubroutes
     ? String.startsWith(compareHref, path ++ "/") || String.startsWith(compareHref, path)
     : path === compareHref || path ++ "/" === compareHref
-  let actualHref = Router.makeHref(href)
+  let queryString = if preserveQueryString {
+    url.search == "" ? "" : (href->String.includes("?") ? "&" : "?") ++ url.search
+  } else {
+    ""
+  }
+  let actualHref = Router.makeHref(href) ++ queryString
   <a
     ?onMouseEnter
     ?onMouseLeave
@@ -37,8 +44,12 @@ let make = (
       switch (ReactEvent.Mouse.metaKey(event), ReactEvent.Mouse.ctrlKey(event)) {
       | (false, false) =>
         event->ReactEvent.Mouse.preventDefault
-        Router.push(href)
+        Router.push(actualHref)
       | _ => ()
+      }
+      switch onClick {
+      | Some(onClick) => onClick(event)
+      | None => ()
       }
     }}>
     children

@@ -9,6 +9,8 @@ let make: (
   ~matchSubroutes: bool=?,
   ~title: string=?,
   ~children: React.element,
+  ~preserveQueryString: bool=?,
   ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
   ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+  ~onClick: ReactEvent.Mouse.t => unit=?,
 ) => React.element
