@@ -2,16 +2,16 @@ let inject = () =>
   Emotion.injectGlobal(`
 @font-face {
   font-family: HelveticaNowDisplay;
-  src: url("/public/assets/webfonts/regular.woff2"),
-    url("/public/assets/webfonts/regular.woff");
+  src: url("/webfonts/regular.woff2"),
+    url("/webfonts/regular.woff");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: HelveticaNowDisplay;
-  src: url("/public/assets/webfonts/bold.woff2"),
-    url("/public/assets/webfonts/bold.woff");
+  src: url("/webfonts/bold.woff2"),
+    url("/webfonts/bold.woff");
   font-style: normal;
   font-weight: 700;
   font-display: swap;
