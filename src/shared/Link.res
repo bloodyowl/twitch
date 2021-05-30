@@ -18,7 +18,7 @@ let make = (
   let path = url.path->List.reduce("", (acc, item) => acc ++ "/" ++ item)
   let compareHref = matchHref->Option.getWithDefault(href)
   let isActive = matchSubroutes
-    ? String.startsWith(compareHref, path ++ "/") || String.startsWith(compareHref, path)
+    ? (path ++ "/")->String.startsWith(compareHref) || path->String.startsWith(compareHref)
     : path === compareHref || path ++ "/" === compareHref
   let queryString = if preserveQueryString {
     url.search == "" ? "" : (href->String.includes("?") ? "&" : "?") ++ url.search

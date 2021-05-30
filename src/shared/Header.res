@@ -183,6 +183,7 @@ let make = () => {
         <React.Fragment key=href>
           <Link
             style={ReactDOM.Style.make(~animationDelay=`${delay->Int.toString}ms`, ())}
+            matchSubroutes={href !== "/"}
             onMouseEnter={_ => {
               clearTimeout()
               setSpeech(_ => Some(title))
