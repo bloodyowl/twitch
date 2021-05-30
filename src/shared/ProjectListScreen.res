@@ -13,7 +13,7 @@ module Styles = {
     "flexGrow": 0,
     "width": 200,
     "display": "flex",
-    "flexDirection": "column",
+    "flexDirection": "column-reverse",
   })
   let sidebarScrollView = css({
     "height": 1,
@@ -103,7 +103,7 @@ module Styles = {
     "alignItems": "stretch",
     "paddingLeft": 10,
     "paddingRight": 10,
-  })
+   })
   let searchBar = css({
     "flexGrow": 1,
     "width": 1,
@@ -162,10 +162,10 @@ module Styles = {
   let stickySidebarOverlay = css({
     "position": "fixed",
     "backgroundColor": Theme.mainContrastColor,
-    "top": 0,
-    "left": 0,
-    "right": 0,
-    "bottom": 0,
+    "top": -10,
+    "left": -10,
+    "right": -10,
+    "bottom": -10,
     "border": "none",
     "backdropFilter": "blur(4px)",
     "animation": `200ms ease-in-out ${overlayAppear}`,
@@ -228,9 +228,42 @@ let make = (~localPath, ~queryString, ~projects) => {
       let hasEnoughSpaceForSidebar = dimensions.width >= minContainerSizeForSidebar
       let sidebar =
         <nav className=Styles.sidebar>
+          <div className=Styles.sidebarScrollView>
+            {projects
+            ->Belt.Array.keepMap(({slug, title, date}) => {
+              let shouldShow = switch query->Dict.get("search") {
+              | Some(search) =>
+                title->String.toUpperCase->String.includes(search->String.toUpperCase)
+              | None => true
+              }
+              shouldShow
+                ? Some(
+                    <Link
+                      key=slug
+                      href={`/code/${slug}`}
+                      preserveQueryString=true
+                      className=Styles.project
+                      activeClassName=Styles.activeProject
+                      onClick={_ => {
+                        if !hasEnoughSpaceForSidebar {
+                          setIsSidebarOpen(_ => false)
+                        }
+                      }}>
+                      <div className=Styles.projectName> {title->React.string} </div>
+                      <time className=Styles.date>
+                        {dateTimeFormater
+                        ->Intl.DateTimeFormat.format(Date.fromString(date))
+                        ->React.string}
+                      </time>
+                    </Link>,
+                  )
+                : None
+            })
+            ->React.array}
+          </div>
+          <Spacer height="10px" />
           <div className=Styles.searchContainer>
             <input
-              autoFocus={hasEnoughSpaceForSidebar}
               type_="text"
               placeholder=`Search …`
               value={query->Dict.get("search")->Option.getWithDefault("")}
@@ -268,40 +301,6 @@ let make = (~localPath, ~queryString, ~projects) => {
                 </>
               : React.null}
           </div>
-          <Spacer height="10px" />
-          <div className=Styles.sidebarScrollView>
-            {projects
-            ->Belt.Array.keepMap(({slug, title, date}) => {
-              let shouldShow = switch query->Dict.get("search") {
-              | Some(search) =>
-                title->String.toUpperCase->String.includes(search->String.toUpperCase)
-              | None => true
-              }
-              shouldShow
-                ? Some(
-                    <Link
-                      key=slug
-                      href={`/code/${slug}`}
-                      preserveQueryString=true
-                      className=Styles.project
-                      activeClassName=Styles.activeProject
-                      onClick={_ => {
-                        if !hasEnoughSpaceForSidebar {
-                          setIsSidebarOpen(_ => false)
-                        }
-                      }}>
-                      <div className=Styles.projectName> {title->React.string} </div>
-                      <time className=Styles.date>
-                        {dateTimeFormater
-                        ->Intl.DateTimeFormat.format(Date.fromString(date))
-                        ->React.string}
-                      </time>
-                    </Link>,
-                  )
-                : None
-            })
-            ->React.array}
-          </div>
         </nav>
 
       <>
@@ -328,6 +327,7 @@ let make = (~localPath, ~queryString, ~projects) => {
                 ? <>
                     <button
                       className=Styles.stickySidebarOverlay
+                      title="Close sidebar"
                       onClick={_ => setIsSidebarOpen(_ => false)}
                     />
                     <FocusTrap
