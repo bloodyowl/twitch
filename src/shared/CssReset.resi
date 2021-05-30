@@ -1,1 +1,1 @@
-/* Nothing to expose */
+let inject: unit => unit
