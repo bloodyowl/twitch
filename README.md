@@ -1,6 +1,6 @@
-# ReScript React Starter Kit
+# Bloodyowl's Twitch playground
 
-> An opinionated starter kit for ReScript React
+> My playground for demoing stuff on Twitch
 
 <img width="626" alt="Screen Shot 2021-02-27 at 23 45 09" src="https://user-images.githubusercontent.com/1688645/109402443-321f6a00-7956-11eb-8883-1e2e6d3ec3ad.png">
 
