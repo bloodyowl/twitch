@@ -2,7 +2,6 @@ module Styles = {
   open Emotion
   let container = css({
     "width": "100%",
-    "maxWidth": 800,
     "margin": "auto",
   })
   let text = css({
