@@ -16,21 +16,34 @@ let inject = () =>
   font-weight: 700;
   font-display: swap;
 }
+
+:root {
+  --main-background-color: #F4F7F8;
+  --main-text-color: #31383E;
+  --main-contrast-color: rgba(0, 0, 0, 0.8);
+  --main-contrast-background-color: rgba(0, 0, 0, 0.05);
+  --main-contrast-accented-background-color: rgba(0, 0, 0, 0.12);
+}
+
+@media(prefers-color-scheme: dark) {
+  :root {
+    --main-background-color: #222;
+    --main-text-color: #fff;
+   --main-contrast-color: rgba(255, 255, 255, 0.6);
+   --main-contrast-background-color: rgba(255, 255, 255, 0.05);
+   --main-contrast-accented-background-color: rgba(255, 255, 255, 0.124);
+  }
+}
+
 html {
   padding: 0;
   margin: 0;
   height: -webkit-fill-available;
   font-family: HelveticaNowDisplay, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #F4F7F8;
-  color: #31383E;
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
 }
 
-@media(prefers-color-scheme: dark) {
-  html {
-    background-color: #222;
-    color: #fff;
-  }
-}
 
 body {
   padding: 0; 
