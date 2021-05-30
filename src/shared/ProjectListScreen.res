@@ -103,7 +103,7 @@ module Styles = {
     "alignItems": "stretch",
     "paddingLeft": 10,
     "paddingRight": 10,
-   })
+  })
   let searchBar = css({
     "flexGrow": 1,
     "width": 1,
@@ -325,9 +325,17 @@ let make = (~localPath, ~queryString, ~projects) => {
           : <>
               {isSidebarOpen
                 ? <>
-                    <button
+                    <div
+                      role="button"
+                      tabIndex=0
                       className=Styles.stickySidebarOverlay
                       title="Close sidebar"
+                      onKeyDown={event => {
+                        switch event->ReactEvent.Keyboard.key {
+                        | "Space" | "Enter" => setIsSidebarOpen(_ => false)
+                        | _ => ()
+                        }
+                      }}
                       onClick={_ => setIsSidebarOpen(_ => false)}
                     />
                     <FocusTrap
