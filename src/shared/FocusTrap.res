@@ -34,10 +34,10 @@ let make = (~onPressEscape=?, ~className=?, ~children) => {
           let isShiftKeyPressed = event->ReactEvent.Keyboard.shiftKey
           if isTargetFirst && isShiftKeyPressed {
             event->ReactEvent.Keyboard.preventDefault
-            last["focus"](. undefined)
+            last["focus"](.)
           } else if isTargetLast && !isShiftKeyPressed {
             event->ReactEvent.Keyboard.preventDefault
-            first["focus"](. undefined)
+            first["focus"](.)
           }
         // No focusable elements, can skip
         | _ => ()
@@ -55,13 +55,13 @@ let make = (~onPressEscape=?, ~className=?, ~children) => {
       let focusable = getFocusableElements(trapElement)
       switch focusable[0] {
       | Some(element) =>
-        let () = element["focus"](. undefined)
+        let () = element["focus"](.)
       | None => ()
       }
       Some(
         () => {
           switch previouslyFocusedRef.current->Nullable.toOption {
-          | Some(previouslyFocusedElement) => previouslyFocusedElement["focus"](. undefined)
+          | Some(previouslyFocusedElement) => previouslyFocusedElement["focus"](.)
           | None => ()
           }
         },
