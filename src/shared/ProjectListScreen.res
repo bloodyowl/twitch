@@ -224,7 +224,18 @@ let make = (~localPath, ~queryString, ~projects) => {
 
   let query = React.useMemo1(() => QueryParams.decode(queryString), [queryString])
 
-  let (isSidebarOpen, setIsSidebarOpen) = React.useState(() => true)
+  let isSidebarOpen = query->Dict.get("sidebar") !== Some("0")
+
+  let setIsSidebarOpen = React.useCallback1(nextIsOpen => {
+    let nextQuery = query->Dict.copy
+    if nextIsOpen === true {
+      nextQuery->Dict.delete("sidebar")
+    } else {
+      nextQuery->Dict.set("sidebar", "0")
+    }
+    let queryString = nextQuery->QueryParams.encode
+    RescriptReactRouter.replace(`?${queryString}`)
+  }, [query])
 
   <>
     <Head> <title> {`Code`->React.string} </title> </Head>
@@ -254,7 +265,7 @@ let make = (~localPath, ~queryString, ~projects) => {
                         activeClassName=Styles.activeProject
                         onClick={_ => {
                           if !hasEnoughSpaceForSidebar {
-                            setIsSidebarOpen(_ => false)
+                            setIsSidebarOpen(false)
                           }
                         }}>
                         <div className=Styles.projectName> {title->React.string} </div>
@@ -293,7 +304,7 @@ let make = (~localPath, ~queryString, ~projects) => {
                     <Spacer width="10px" />
                     <button
                       className=Styles.collapse
-                      onClick={_ => setIsSidebarOpen(_ => false)}
+                      onClick={_ => setIsSidebarOpen(false)}
                       title="Collapse sidebar">
                       <svg viewBox="0 0 10 10" width="16" height="16">
                         <g
@@ -342,15 +353,15 @@ let make = (~localPath, ~queryString, ~projects) => {
                         title="Close sidebar"
                         onKeyDown={event => {
                           switch event->ReactEvent.Keyboard.key {
-                          | "Space" | "Enter" => setIsSidebarOpen(_ => false)
+                          | "Space" | "Enter" => setIsSidebarOpen(false)
                           | _ => ()
                           }
                         }}
-                        onClick={_ => setIsSidebarOpen(_ => false)}
+                        onClick={_ => setIsSidebarOpen(false)}
                       />
                       <FocusTrap
                         className=Styles.stickySidebarContainer
-                        onPressEscape={_ => setIsSidebarOpen(_ => false)}>
+                        onPressEscape={_ => setIsSidebarOpen(false)}>
                         sidebar
                         <svg
                           className=Styles.stickySidebarPointer
@@ -362,7 +373,9 @@ let make = (~localPath, ~queryString, ~projects) => {
                       </FocusTrap>
                     </>
                   : React.null}
-                <button className=Styles.stickySidebarAction onClick={_ => setIsSidebarOpen(not)}>
+                <button
+                  className=Styles.stickySidebarAction
+                  onClick={_ => setIsSidebarOpen(!isSidebarOpen)}>
                   <svg viewBox="0 0 16 16" width="16" height="16">
                     <g stroke="#fff" strokeWidth="2" strokeLinecap="round">
                       <line x1="0" y1="2" x2="16" y2="2" />
