@@ -190,7 +190,6 @@ let make = () => {
         let delay = index * 100
         <React.Fragment key=href>
           <Link
-            style={ReactDOM.Style.make(~animationDelay=`${delay->Int.toString}ms`, ())}
             matchSubroutes={href !== "/"}
             onMouseEnter=?{Environment.supportsHover
               ? Some(
@@ -215,7 +214,10 @@ let make = () => {
               setSpeech(_ => None)
             }}
             href
-            className=Styles.navItem
+            className={
+              open Emotion
+              cx([Styles.navItem, css({"animationDelay": `${delay->Int.toString}ms`})])
+            }
             activeClassName=Styles.activeNavItem
             title>
             <div ariaHidden=true> {emoji->React.string} </div>

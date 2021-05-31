@@ -1,4 +1,13 @@
+open Emotion
+
+module Styles = {
+  let spacer = css({"flexShrink": 0.0, "flexGrow": 0.0})
+}
+
 @react.component
 let make = (~width="10px", ~height="10px", ()) => {
-  <div style={ReactDOM.Style.make(~flexShrink="0", ~flexGrow="0", ~width, ~height, ())} />
+  let className = React.useMemo2(() => {
+    css({"width": width, "height": height})
+  }, (width, height))
+  <div className={cx([Styles.spacer, className])} />
 }
