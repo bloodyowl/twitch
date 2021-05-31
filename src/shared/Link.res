@@ -15,7 +15,7 @@ let make = (
   ~onClick=?,
 ) => {
   let url = Router.useUrl()
-  let path = url.path->List.reduce("", (acc, item) => acc ++ "/" ++ item)
+  let path = url.path->List.toArray->Array.joinWith("/")
   let compareHref = matchHref->Option.getWithDefault(href)
   let isActive = matchSubroutes
     ? (path ++ "/")->String.startsWith(compareHref) || path->String.startsWith(compareHref)
