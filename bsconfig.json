@@ -30,5 +30,9 @@
     "rescript-js"
   ],
   "bs-dev-dependencies": ["rescript-test"],
-  "bsc-flags": ["-open Belt", "-open ReScriptJs__Js"]
+  "bsc-flags": [
+    "-nopervasives",
+    "-open Belt",
+    "-open ReScriptJs__JsWithPervasives"
+  ]
 }

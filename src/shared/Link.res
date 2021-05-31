@@ -46,7 +46,7 @@ let make = (
     href=actualHref
     ?title
     className={Emotion.cx(
-      [className, isActive ? activeClassName : None]->Belt.Array.keepMap(x => x),
+      [className, isActive ? activeClassName : None]->Belt.Array.keepMap(identity),
     )}
     style=?{switch (style, isActive ? activeStyle : None) {
     | (Some(a), Some(b)) => Some(ReactDOM.Style.combine(a, b))
