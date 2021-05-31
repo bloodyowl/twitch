@@ -229,6 +229,7 @@ let make = (~localPath, ~queryString, ~projects) => {
       let sidebar =
         <nav className=Styles.sidebar>
           <div className=Styles.sidebarScrollView>
+            <Spacer height="10px" />
             {projects
             ->Belt.Array.keepMap(({slug, title, date}) => {
               let shouldShow = switch query->Dict.get("search") {
@@ -261,7 +262,6 @@ let make = (~localPath, ~queryString, ~projects) => {
             })
             ->React.array}
           </div>
-          <Spacer height="10px" />
           <div className=Styles.searchContainer>
             <input
               type_="text"
