@@ -8,8 +8,12 @@ module Styles = {
   })
   let logoContainer = css({
     "position": "relative",
+    "padding": "0 10px",
     "zIndex": 2,
     "transition": "200ms ease-in-out transform",
+    "display": "flex",
+    "alignItems": "center",
+    "justifyContent": "center",
   })
   let speakingLogoContainer = cx([
     logoContainer,
@@ -22,7 +26,7 @@ module Styles = {
     "position": "absolute",
     "top": 0,
     "left": "100%",
-    "transform": "translateX(10px)",
+    "transform": "translate(10px, 10px)",
     "backgroundColor": speechBackgroundColor,
     "color": "#fff",
     "padding": "10px 20px",
@@ -63,8 +67,10 @@ module Styles = {
     "alignItems": "center",
     "justifyContent": "center",
     "animation": `300ms ease-in-out ${popAnimation} backwards`,
-    ":hover": {
-      "backgroundColor": "rgba(0, 0, 0, 0.05)",
+    "@media(hover: hover)": {
+      ":hover": {
+        "backgroundColor": "rgba(0, 0, 0, 0.05)",
+      },
     },
     ":active": {
       "backgroundColor": "#55269A",
@@ -74,8 +80,10 @@ module Styles = {
   let activeNavItem = css({
     "backgroundColor": "#9146ff",
     "color": "#fff",
-    ":hover": {
-      "backgroundColor": "#9146ff",
+    "@media(hover: hover)": {
+      ":hover": {
+        "backgroundColor": "#9146ff",
+      },
     },
     ":active": {
       "backgroundColor": "#55269A",
@@ -156,7 +164,7 @@ let make = () => {
       | Some(_) => Styles.speakingLogoContainer
       | None => Styles.logoContainer
       }}>
-      <svg viewBox="0 0 2400 2800" width="48" height="56">
+      <svg viewBox="0 0 2400 2800" width="36" height="42">
         <path fill="#fff" d="M2200 1300l-400 400h-400l-350 350v-350H600V200h1600z" />
         <g fill=Theme.mainPurple>
           <path

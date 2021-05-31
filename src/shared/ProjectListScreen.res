@@ -29,10 +29,9 @@ module Styles = {
     "color": "currentColor",
     "borderRadius": "10px",
     "lineHeight": 1.0,
-    ":hover": {
-      "backgroundColor": "rgba(0, 0, 0, 0.07)",
-      "@media(prefers-color-scheme: dark)": {
-        "backgroundColor": "rgba(255, 255, 255, 0.05)",
+    "@media(hover: hover)": {
+      ":hover": {
+        "backgroundColor": Theme.mainContrastBackgroundColor,
       },
     },
     ":active": {
@@ -42,9 +41,8 @@ module Styles = {
   let activeProject = css({
     "backgroundColor": Theme.mainPurple,
     "color": "#fff",
-    ":hover": {
-      "backgroundColor": Theme.mainPurple,
-      "@media(prefers-color-scheme: dark)": {
+    "@media(hover: hover)": {
+      ":hover": {
         "backgroundColor": Theme.mainPurple,
       },
     },
@@ -65,6 +63,12 @@ module Styles = {
     "padding": 10,
     "paddingTop": 0,
   })
+  let contentsNextToOpenSidebar = cx([
+    contents,
+    css({
+      "paddingLeft": 0,
+    }),
+  ])
   let projectContainer = css({
     "position": "relative",
     "display": "flex",
@@ -73,12 +77,9 @@ module Styles = {
     "justifyContent": "center",
     "alignSelf": "stretch",
     "flexGrow": 1,
-    "backgroundColor": "#fff",
+    "backgroundColor": Theme.mainAccentedBackgroundColor,
     "borderRadius": 10,
     "boxShadow": "0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 15px 20px rgba(0, 0, 0, 0.1)",
-    "@media(prefers-color-scheme: dark)": {
-      "backgroundColor": "#444",
-    },
   })
   let projectContents = css({
     "height": 1,
@@ -112,7 +113,7 @@ module Styles = {
     "borderRadius": 8,
     "border": "none",
     "fontFamily": "inherit",
-    "padding": 10,
+    "padding": "5px 20px",
     "fontSize": "inherit",
     ":focus": {
       "background": Theme.mainContrastAccentedBackgroundColor,
@@ -127,8 +128,10 @@ module Styles = {
     "padding": 10,
     "borderRadius": 8,
     "cursor": "pointer",
-    ":hover": {
-      "background": Theme.mainContrastAccentedBackgroundColor,
+    "@media(hover: hover)": {
+      ":hover": {
+        "background": Theme.mainContrastAccentedBackgroundColor,
+      },
     },
   })
 
@@ -144,8 +147,10 @@ module Styles = {
     "height": stickySidebarActionSize,
     "borderRadius": stickySidebarActionSize / 2,
     "cursor": "pointer",
-    ":hover": {
-      "backgroundColor": Theme.mainPink,
+    "@media(hover: hover)": {
+      ":hover": {
+        "backgroundColor": Theme.mainPink,
+      },
     },
     ":active": {
       "backgroundColor": Theme.mainPink,
@@ -307,7 +312,10 @@ let make = (~localPath, ~queryString, ~projects) => {
 
         <>
           {hasEnoughSpaceForSidebar && isSidebarOpen ? sidebar : React.null}
-          <main className=Styles.contents>
+          <main
+            className={hasEnoughSpaceForSidebar && isSidebarOpen
+              ? Styles.contentsNextToOpenSidebar
+              : Styles.contents}>
             {switch localPath {
             | list{slug} =>
               let project = projects->Array.find(project => project.slug === slug)

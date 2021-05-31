@@ -25,8 +25,10 @@ module Styles = {
     "lineHeight": 1.1,
     "textDecoration": "none",
     "display": "block",
-    ":hover": {
-      "backgroundImage": `linear-gradient(to top left, ${Theme.mainPurple}, ${Theme.mainPink})`,
+    "@media(hover: hover)": {
+      ":hover": {
+        "backgroundImage": `linear-gradient(to top left, ${Theme.mainPurple}, ${Theme.mainPink})`,
+      },
     },
   })
 }

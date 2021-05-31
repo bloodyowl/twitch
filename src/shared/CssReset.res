@@ -20,6 +20,7 @@ let inject = () =>
 :root {
   --main-background-color: #F4F7F8;
   --main-text-color: #31383E;
+  --main-accented-background-color: #FFF;
   --main-contrast-color: rgba(0, 0, 0, 0.8);
   --main-contrast-background-color: rgba(0, 0, 0, 0.05);
   --main-contrast-accented-background-color: rgba(0, 0, 0, 0.12);
@@ -27,8 +28,9 @@ let inject = () =>
 
 @media(prefers-color-scheme: dark) {
   :root {
-    --main-background-color: #222;
-    --main-text-color: #fff;
+   --main-background-color: #222;
+   --main-text-color: #fff;
+   --main-accented-background-color: #444;
    --main-contrast-color: rgba(255, 255, 255, 0.6);
    --main-contrast-background-color: rgba(255, 255, 255, 0.05);
    --main-contrast-accented-background-color: rgba(255, 255, 255, 0.124);
