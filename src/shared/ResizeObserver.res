@@ -21,8 +21,8 @@ let useResizeObserver = (element: React.ref<Nullable.t<Dom.element>>) => {
       let resizeObserver = ResizeObserver.make(entries => {
         entries->Array.forEach(entry => {
           let contentRect = entry->ResizeObserverEntry.contentRect
-          let width = contentRect.width->Belt.Int.fromFloat
-          let height = contentRect.height->Belt.Int.fromFloat
+          let width = contentRect.width->Int.fromFloat
+          let height = contentRect.height->Int.fromFloat
           setDimensions(prevState => {
             // Makes sure we don't trigger a rerender if the dimensions are the same
             switch prevState {
