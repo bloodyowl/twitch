@@ -221,148 +221,151 @@ let make = (~localPath, ~queryString, ~projects) => {
 
   let (isSidebarOpen, setIsSidebarOpen) = React.useState(() => true)
 
-  <div className=Styles.container ref={ReactDOM.Ref.domRef(containerRef)}>
-    {switch dimensions {
-    | None => React.null
-    | Some(dimensions) =>
-      let hasEnoughSpaceForSidebar = dimensions.width >= minContainerSizeForSidebar
-      let sidebar =
-        <nav className=Styles.sidebar>
-          <div className=Styles.sidebarScrollView>
-            <Spacer height="10px" />
-            {projects
-            ->Belt.Array.keepMap(({slug, title, date}) => {
-              let shouldShow = switch query->Dict.get("search") {
-              | Some(search) =>
-                title->String.toUpperCase->String.includes(search->String.toUpperCase)
-              | None => true
-              }
-              shouldShow
-                ? Some(
-                    <Link
-                      key=slug
-                      href={`/code/${slug}`}
-                      preserveQueryString=true
-                      className=Styles.project
-                      activeClassName=Styles.activeProject
-                      onClick={_ => {
-                        if !hasEnoughSpaceForSidebar {
-                          setIsSidebarOpen(_ => false)
-                        }
-                      }}>
-                      <div className=Styles.projectName> {title->React.string} </div>
-                      <time className=Styles.date>
-                        {dateTimeFormater
-                        ->Intl.DateTimeFormat.format(Date.fromString(date))
-                        ->React.string}
-                      </time>
-                    </Link>,
-                  )
-                : None
-            })
-            ->React.array}
-          </div>
-          <div className=Styles.searchContainer>
-            <input
-              type_="text"
-              placeholder=`Search …`
-              value={query->Dict.get("search")->Option.getWithDefault("")}
-              className=Styles.searchBar
-              onChange={event => {
-                let target = event->ReactEvent.Form.target
-                let value = target["value"]
-                let nextQuery = query->Dict.copy
-                if value === "" {
-                  nextQuery->Dict.delete("search")
-                } else {
-                  nextQuery->Dict.set("search", value)
+  <>
+    <Head> <title> {`Code`->React.string} </title> </Head>
+    <div className=Styles.container ref={ReactDOM.Ref.domRef(containerRef)}>
+      {switch dimensions {
+      | None => React.null
+      | Some(dimensions) =>
+        let hasEnoughSpaceForSidebar = dimensions.width >= minContainerSizeForSidebar
+        let sidebar =
+          <nav className=Styles.sidebar>
+            <div className=Styles.sidebarScrollView>
+              <Spacer height="10px" />
+              {projects
+              ->Belt.Array.keepMap(({slug, title, date}) => {
+                let shouldShow = switch query->Dict.get("search") {
+                | Some(search) =>
+                  title->String.toUpperCase->String.includes(search->String.toUpperCase)
+                | None => true
                 }
-                let queryString = nextQuery->QueryParams.encode
-                RescriptReactRouter.replace(`?${queryString}`)
-              }}
-            />
-            {hasEnoughSpaceForSidebar
-              ? <>
-                  <Spacer width="10px" />
-                  <button
-                    className=Styles.collapse
-                    onClick={_ => setIsSidebarOpen(_ => false)}
-                    title="Collapse sidebar">
-                    <svg viewBox="0 0 10 10" width="16" height="16">
-                      <g
-                        fill="none"
-                        stroke=Theme.mainTextColor
-                        strokeLinejoin="round"
-                        strokeLinecap="round">
-                        <polyline points="5 0, 0 5, 5 10" /> <polyline points="0 5, 10 5" />
-                      </g>
-                    </svg>
-                  </button>
-                </>
-              : React.null}
-          </div>
-        </nav>
-
-      <>
-        {hasEnoughSpaceForSidebar && isSidebarOpen ? sidebar : React.null}
-        <main className=Styles.contents>
-          {switch localPath {
-          | list{slug} =>
-            let project = projects->Array.find(project => project.slug === slug)
-            switch project {
-            | Some({render}) =>
-              <div className=Styles.projectContainer>
-                <div className=Styles.projectContents> {render()} </div>
-              </div>
-            | None => <div className=Styles.nothing> {"Not found"->React.string} </div>
-            }
-          | list{} => <div className=Styles.nothing> {"Pick a project"->React.string} </div>
-          | _ => <ErrorPage text="Not found" />
-          }}
-        </main>
-        {hasEnoughSpaceForSidebar && isSidebarOpen
-          ? React.null
-          : <>
-              {isSidebarOpen
+                shouldShow
+                  ? Some(
+                      <Link
+                        key=slug
+                        href={`/code/${slug}`}
+                        preserveQueryString=true
+                        className=Styles.project
+                        activeClassName=Styles.activeProject
+                        onClick={_ => {
+                          if !hasEnoughSpaceForSidebar {
+                            setIsSidebarOpen(_ => false)
+                          }
+                        }}>
+                        <div className=Styles.projectName> {title->React.string} </div>
+                        <time className=Styles.date>
+                          {dateTimeFormater
+                          ->Intl.DateTimeFormat.format(Date.fromString(date))
+                          ->React.string}
+                        </time>
+                      </Link>,
+                    )
+                  : None
+              })
+              ->React.array}
+            </div>
+            <div className=Styles.searchContainer>
+              <input
+                type_="text"
+                placeholder=`Search …`
+                value={query->Dict.get("search")->Option.getWithDefault("")}
+                className=Styles.searchBar
+                onChange={event => {
+                  let target = event->ReactEvent.Form.target
+                  let value = target["value"]
+                  let nextQuery = query->Dict.copy
+                  if value === "" {
+                    nextQuery->Dict.delete("search")
+                  } else {
+                    nextQuery->Dict.set("search", value)
+                  }
+                  let queryString = nextQuery->QueryParams.encode
+                  RescriptReactRouter.replace(`?${queryString}`)
+                }}
+              />
+              {hasEnoughSpaceForSidebar
                 ? <>
-                    <div
-                      role="button"
-                      tabIndex=0
-                      className=Styles.stickySidebarOverlay
-                      title="Close sidebar"
-                      onKeyDown={event => {
-                        switch event->ReactEvent.Keyboard.key {
-                        | "Space" | "Enter" => setIsSidebarOpen(_ => false)
-                        | _ => ()
-                        }
-                      }}
+                    <Spacer width="10px" />
+                    <button
+                      className=Styles.collapse
                       onClick={_ => setIsSidebarOpen(_ => false)}
-                    />
-                    <FocusTrap
-                      className=Styles.stickySidebarContainer
-                      onPressEscape={_ => setIsSidebarOpen(_ => false)}>
-                      sidebar
-                      <svg
-                        className=Styles.stickySidebarPointer
-                        viewBox="0 0 10 10"
-                        width="18"
-                        height="18">
-                        <polygon fill=Theme.mainBackgroundColor points="0 0, 10 0, 5 5" />
+                      title="Collapse sidebar">
+                      <svg viewBox="0 0 10 10" width="16" height="16">
+                        <g
+                          fill="none"
+                          stroke=Theme.mainTextColor
+                          strokeLinejoin="round"
+                          strokeLinecap="round">
+                          <polyline points="5 0, 0 5, 5 10" /> <polyline points="0 5, 10 5" />
+                        </g>
                       </svg>
-                    </FocusTrap>
+                    </button>
                   </>
                 : React.null}
-              <button className=Styles.stickySidebarAction onClick={_ => setIsSidebarOpen(not)}>
-                <svg viewBox="0 0 16 16" width="16" height="16">
-                  <g stroke="#fff" strokeWidth="2" strokeLinecap="round">
-                    <line x1="0" y1="2" x2="16" y2="2" />
-                    <line x1="0" y1="8" x2="16" y2="8" />
-                    <line x1="0" y1="14" x2="16" y2="14" />
-                  </g>
-                </svg>
-              </button>
-            </>}
-      </>
-    }}
-  </div>
+            </div>
+          </nav>
+
+        <>
+          {hasEnoughSpaceForSidebar && isSidebarOpen ? sidebar : React.null}
+          <main className=Styles.contents>
+            {switch localPath {
+            | list{slug} =>
+              let project = projects->Array.find(project => project.slug === slug)
+              switch project {
+              | Some({render}) =>
+                <div className=Styles.projectContainer>
+                  <div className=Styles.projectContents> {render()} </div>
+                </div>
+              | None => <div className=Styles.nothing> {"Not found"->React.string} </div>
+              }
+            | list{} => <div className=Styles.nothing> {"Pick a project"->React.string} </div>
+            | _ => <ErrorPage text="Not found" />
+            }}
+          </main>
+          {hasEnoughSpaceForSidebar && isSidebarOpen
+            ? React.null
+            : <>
+                {isSidebarOpen
+                  ? <>
+                      <div
+                        role="button"
+                        tabIndex=0
+                        className=Styles.stickySidebarOverlay
+                        title="Close sidebar"
+                        onKeyDown={event => {
+                          switch event->ReactEvent.Keyboard.key {
+                          | "Space" | "Enter" => setIsSidebarOpen(_ => false)
+                          | _ => ()
+                          }
+                        }}
+                        onClick={_ => setIsSidebarOpen(_ => false)}
+                      />
+                      <FocusTrap
+                        className=Styles.stickySidebarContainer
+                        onPressEscape={_ => setIsSidebarOpen(_ => false)}>
+                        sidebar
+                        <svg
+                          className=Styles.stickySidebarPointer
+                          viewBox="0 0 10 10"
+                          width="18"
+                          height="18">
+                          <polygon fill=Theme.mainBackgroundColor points="0 0, 10 0, 5 5" />
+                        </svg>
+                      </FocusTrap>
+                    </>
+                  : React.null}
+                <button className=Styles.stickySidebarAction onClick={_ => setIsSidebarOpen(not)}>
+                  <svg viewBox="0 0 16 16" width="16" height="16">
+                    <g stroke="#fff" strokeWidth="2" strokeLinecap="round">
+                      <line x1="0" y1="2" x2="16" y2="2" />
+                      <line x1="0" y1="8" x2="16" y2="8" />
+                      <line x1="0" y1="14" x2="16" y2="14" />
+                    </g>
+                  </svg>
+                </button>
+              </>}
+        </>
+      }}
+    </div>
+  </>
 }
