@@ -225,7 +225,6 @@ let make = () => {
         rel="noopener">
         {`Source code`->React.string}
       </a>
-      <Spacer height="5px" />
       <div className=Styles.copyright> {`© bloodyowl 2021`->React.string} </div>
     </div>
   </header>
