@@ -4,9 +4,9 @@ let publicPath = publicPath->Option.getWithDefault("/")
 
 let join = (s1, s2) =>
   `${s1}/${s2}`
-  ->Js.String2.replaceByRe(%re("/:\/\//g"), "__PROTOCOL__")
-  ->Js.String2.replaceByRe(%re("/\/+/g"), "/")
-  ->Js.String2.replaceByRe(%re("/__PROTOCOL__/g"), "://")
+  ->String.replaceRegExp(%re("/:\/\//g"), "__PROTOCOL__")
+  ->String.replaceRegExp(%re("/\/+/g"), "/")
+  ->String.replaceRegExp(%re("/__PROTOCOL__/g"), "://")
 
 let makeHref = join(publicPath)
 
@@ -23,22 +23,19 @@ let pathParse = str =>
   | "" | "/" => list{}
   | raw =>
     /* remove the preceeding /, which every pathname seems to have */
-    let raw = Js.String.sliceToEnd(~from=1, raw)
+    let raw = raw->String.sliceToEnd(~start=1)
     /* remove the trailing /, which some pathnames might have. Ugh */
-    let raw = switch Js.String.get(raw, Js.String.length(raw) - 1) {
-    | "/" => Js.String.slice(~from=0, ~to_=-1, raw)
+    let raw = switch raw->String.get(String.length(raw) - 1) {
+    | Some("/") => raw->String.slice(~start=0, ~end=-1)
     | _ => raw
     }
     /* remove search portion if present in string */
-    let raw = switch raw |> Js.String.splitAtMost("?", ~limit=2) {
+    let raw = switch raw->String.splitAtMost("?", ~limit=2) {
     | [path, _] => path
     | _ => raw
     }
 
-    raw
-    |> Js.String.split("/")
-    |> Js.Array.filter(item => String.length(item) != 0)
-    |> List.fromArray
+    raw->String.split("/")->Array.filter(item => item->String.length != 0)->List.fromArray
   }
 
 type url = RescriptReactRouter.url
