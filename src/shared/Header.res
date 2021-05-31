@@ -184,16 +184,24 @@ let make = () => {
           <Link
             style={ReactDOM.Style.make(~animationDelay=`${delay->Int.toString}ms`, ())}
             matchSubroutes={href !== "/"}
-            onMouseEnter={_ => {
-              clearTimeout()
-              setSpeech(_ => Some(title))
-            }}
-            onMouseLeave={_ => {
-              let timeoutId = setTimeout(() => {
-                setSpeech(_ => None)
-              }, 500)
-              timeoutRef.current = Some(timeoutId)
-            }}
+            onMouseEnter=?{Environment.supportsHover
+              ? Some(
+                  _ => {
+                    clearTimeout()
+                    setSpeech(_ => Some(title))
+                  },
+                )
+              : None}
+            onMouseLeave=?{Environment.supportsHover
+              ? Some(
+                  _ => {
+                    let timeoutId = setTimeout(() => {
+                      setSpeech(_ => None)
+                    }, 500)
+                    timeoutRef.current = Some(timeoutId)
+                  },
+                )
+              : None}
             onClick={_ => {
               clearTimeout()
               setSpeech(_ => None)
