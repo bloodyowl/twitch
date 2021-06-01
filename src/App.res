@@ -16,8 +16,10 @@ module App = {
       {switch url.path {
       | list{} => <Hero title=`Bienvenue !` />
       | list{"discuss"} => <Hero title=`Discussions` />
-      | list{"code", ...localPath} =>
-        <ProjectListScreen localPath queryString=url.search projects=ProjectList.projects />
+      | list{"code" as rootPath, ...localPath} =>
+        <ProjectListScreen
+          rootPath={`/${rootPath}`} localPath queryString=url.search projects=ProjectList.projects
+        />
       | _ => <ErrorPage text="Not found" />
       }}
     </>

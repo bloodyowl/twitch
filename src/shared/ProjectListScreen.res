@@ -217,7 +217,7 @@ let dateTimeFormater = Intl.DateTimeFormat.makeWithLocaleAndOptions(
 let minContainerSizeForSidebar = 600
 
 @react.component
-let make = (~localPath, ~queryString, ~projects) => {
+let make = (~rootPath, ~localPath, ~queryString, ~projects) => {
   let containerRef = React.useRef(Nullable.null)
 
   let dimensions = ResizeObserver.useResizeObserver(containerRef)
@@ -259,7 +259,7 @@ let make = (~localPath, ~queryString, ~projects) => {
                   ? Some(
                       <Link
                         key=slug
-                        href={`/code/${slug}`}
+                        href={`/${rootPath}/${slug}`}
                         preserveQueryString=true
                         className=Styles.project
                         activeClassName=Styles.activeProject
