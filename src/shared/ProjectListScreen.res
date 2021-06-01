@@ -268,7 +268,7 @@ let make = (~rootPath, ~localPath, ~queryString, ~projects) => {
                   ? Some(
                       <Link
                         key=slug
-                        href={`/${rootPath}/${slug}`}
+                        href={`${rootPath}/${slug}`}
                         preserveQueryString=true
                         className=Styles.project
                         activeClassName=Styles.activeProject
