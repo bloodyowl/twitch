@@ -128,10 +128,16 @@ module Styles = {
     "padding": 10,
     "borderRadius": 8,
     "cursor": "pointer",
+    "display": "flex",
+    "alignItems": "center",
+    "justifyContent": "center",
     "@media(hover: hover)": {
       ":hover": {
         "background": Theme.mainContrastAccentedBackgroundColor,
       },
+    },
+    ":active": {
+      "opacity": 0.7,
     },
   })
 
@@ -146,6 +152,9 @@ module Styles = {
     "width": stickySidebarActionSize,
     "height": stickySidebarActionSize,
     "borderRadius": stickySidebarActionSize / 2,
+    "display": "flex",
+    "alignItems": "center",
+    "justifyContent": "center",
     "cursor": "pointer",
     "@media(hover: hover)": {
       ":hover": {

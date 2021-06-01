@@ -59,4 +59,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1
-}`)
+}
+
+input, select, textarea, button, a, [role="button"] {-webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+`)
