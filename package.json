@@ -11,7 +11,7 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "start": "rescript build -w -ws 9999",
+    "start": "rescript build -with-deps -w -ws 9999",
     "build": "rescript",
     "bundle": "webpack",
     "server": "node server/server.mjs",
