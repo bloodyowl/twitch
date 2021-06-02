@@ -269,5 +269,5 @@ console.log(`${chalk.green("ReScript React")}`);
 console.log(`${chalk.white("---")}`);
 console.log(`${chalk.cyan("Development server started")}`);
 console.log(``);
-console.log(`${chalk.magenta("URL")} -> http://localhost:3000${publicPath}`);
+console.log(`${chalk.magenta("URL")} -> http://localhost:${port}${publicPath}`);
 console.log(``);
