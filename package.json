@@ -1,6 +1,6 @@
 {
   "name": "bloodyowl-twitch",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "A playground for demoing stuff on Twitch",
   "main": "src/App.bs.js",
   "repository": "git@github.com:bloodyowl/twitch.git",
