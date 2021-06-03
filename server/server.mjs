@@ -9,6 +9,10 @@ import config from "../webpack.config.js";
 
 let fs = await import("fs");
 
+let { name } = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8")
+);
+
 let app = express();
 
 app.disable("x-powered-by");
@@ -94,7 +98,7 @@ let port = process.env.PORT || 3000;
 app.listen(port);
 
 console.log(`${chalk.white("---")}`);
-console.log(`${chalk.green("ReScript React")}`);
+console.log(`${chalk.green(`${name}`)}`);
 console.log(`${chalk.white("---")}`);
 console.log(`${chalk.cyan("Development server started")}`);
 console.log(``);
