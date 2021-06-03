@@ -1,3 +1,7 @@
+## 1.0.0
+
+Initial stable release
+
 ## 0.7.0
 
 Changes:
