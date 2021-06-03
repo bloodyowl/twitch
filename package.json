@@ -1,12 +1,12 @@
 {
-  "name": "rescript-react-starter-kit",
+  "name": "bloodyowl-twitch",
   "version": "0.7.0",
-  "description": "A starter kit for ReScript React applications",
+  "description": "A playground for demoing stuff on Twitch",
   "main": "src/App.bs.js",
-  "repository": "git@github.com:bloodyowl/rescript-react-starter-kit.git",
+  "repository": "git@github.com:bloodyowl/twitch.git",
   "author": "bloodyowl <bloodyowl@icloud.com>",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "engines": {
     "node": ">=14.0.0"
   },
