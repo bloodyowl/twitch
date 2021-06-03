@@ -16,7 +16,8 @@
     "bundle": "webpack",
     "server": "node server/server.mjs",
     "clean": "rescript clean",
-    "test": "retest --with-dom test/*_test.mjs"
+    "test": "retest --with-dom test/*_test.mjs",
+    "release": "git push && git push --tags"
   },
   "devDependencies": {
     "chalk": "^4.1.0",
