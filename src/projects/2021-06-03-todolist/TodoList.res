@@ -44,6 +44,8 @@ module Styles = {
     "border": "none",
     "position": "sticky",
     "bottom": 15,
+    "boxSizing": "border-box",
+    "boxShadow": `0 0 0 1px ${Theme.mainContrastAccentedBackgroundColor}, 0 5px 10px ${Theme.mainContrastBackgroundColor}`,
   })
   let listItem = css({
     "display": "flex",
