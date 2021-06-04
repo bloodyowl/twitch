@@ -9,6 +9,9 @@ module Styles = {
     "alignItems": "center",
     "flexGrow": 1,
     "alignSelf": "stretch",
+    "margin": "0 10px",
+    "paddingBottom": 50,
+    "overflowY": "auto",
   })
   let title = css({
     "fontWeight": "400",
