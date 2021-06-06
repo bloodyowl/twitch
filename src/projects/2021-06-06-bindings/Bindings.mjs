@@ -64,7 +64,7 @@ console.log(location.href);
 
 console.log((location.href = "/bar", undefined));
 
-btoa("foo");
+var x = btoa("foo");
 
 var $$Date = {};
 
@@ -103,6 +103,8 @@ function foo(foo$1, bar, bazOpt, param) {
 foo("foo", "bar", undefined, undefined);
 
 function Bindings$MyComponent(Props) {
+  var $staropt$star = Props.baz;
+  $staropt$star !== undefined;
   return React.createElement("div", undefined);
 }
 
@@ -110,7 +112,7 @@ var MyComponent = {
   make: Bindings$MyComponent
 };
 
-var x = React.createElement(Bindings$MyComponent, {
+var z = React.createElement(Bindings$MyComponent, {
       foo: "foo",
       bar: "bar"
     });
@@ -132,6 +134,7 @@ export {
   user ,
   LocalStorage ,
   $$Location ,
+  x ,
   $$Date ,
   myDate ,
   myDateFromFloat ,
@@ -139,7 +142,7 @@ export {
   myDateNow ,
   foo ,
   MyComponent ,
-  x ,
+  z ,
   
 }
 /*  Not a pure module */

@@ -105,12 +105,12 @@ foo(~bar="bar", ~foo="foo", ())
 
 module MyComponent = {
   @react.component
-  let make = (~foo, ~bar, ~baz="hello") => {
+  let make = (~foo as _, ~bar as _, ~baz as _="hello") => {
     <div />
   }
 }
 
-let x = <MyComponent foo="foo" bar="bar" />
+let z = <MyComponent foo="foo" bar="bar" />
 
 type myObject
 @obj
