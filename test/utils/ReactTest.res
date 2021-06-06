@@ -351,3 +351,92 @@ module Simulate = {
   @module("react-dom/test-utils.js") @scope("Simulate")
   external compositionUpdateWithEvent: (Dom.element, {..}) => unit = "compositionUpdate"
 }
+
+@send
+external querySelectorAll: (Dom.element, string) => Js.Array2.array_like<Dom.element> =
+  "querySelectorAll"
+
+@return(nullable) @send
+external querySelector: (Dom.element, string) => option<Dom.element> = "querySelector"
+@return(nullable) @send
+external querySelectorAsObject: (Dom.element, string) => option<{..}> = "querySelector"
+
+@get external textContent: Dom.element => string = "textContent"
+
+let querySelectorAll = (element, string) => Array.fromArrayLike(querySelectorAll(element, string))
+
+let findElementWithText = (element, selector, text) =>
+  element->querySelectorAll(selector)->Array.find(node => node->textContent->String.includes(text))
+
+let containsElement = (~message=?, element: Dom.element, selector: string) =>
+  assertion(
+    ~message?,
+    ~operator="containsElement",
+    (a, b) => a === b,
+    element->querySelector(selector)->Belt.Option.isSome,
+    true,
+  )
+
+let doesNotContainElement = (~message=?, element: Dom.element, selector: string) =>
+  assertion(
+    ~message?,
+    ~operator="doesNotContainElement",
+    (a, b) => a === b,
+    element->querySelector(selector)->Belt.Option.isSome,
+    false,
+  )
+
+let containsElementWithText = (~message=?, element: Dom.element, selector: string, text: string) =>
+  assertion(
+    ~message?,
+    ~operator="containsElementWithText",
+    (a, b) => a === b,
+    element->querySelectorAll(selector)->Array.some(node => node->textContent === text),
+    true,
+  )
+
+let doesNotContainElementWithText = (
+  ~message=?,
+  element: Dom.element,
+  selector: string,
+  text: string,
+) =>
+  assertion(
+    ~message?,
+    ~operator="containsElementWithText",
+    (a, b) => a === b,
+    element->querySelectorAll(selector)->Array.some(node => node->textContent === text),
+    false,
+  )
+
+let containsElementWithPartialText = (
+  ~message=?,
+  element: Dom.element,
+  selector: string,
+  text: string,
+) =>
+  assertion(
+    ~message?,
+    ~operator="containsElementWithPartialText",
+    (a, b) => a === b,
+    element
+    ->querySelectorAll(selector)
+    ->Array.some(node => node->textContent->String.includes(text)),
+    true,
+  )
+
+let doesNotContainElementWithPartialText = (
+  ~message=?,
+  element: Dom.element,
+  selector: string,
+  text: string,
+) =>
+  assertion(
+    ~message?,
+    ~operator="containsElementWithPartialText",
+    (a, b) => a === b,
+    element
+    ->querySelectorAll(selector)
+    ->Array.some(node => node->textContent->String.includes(text)),
+    false,
+  )

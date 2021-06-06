@@ -159,6 +159,7 @@ let make = () => {
             </div>
           </label>
           <button
+            ariaLabel="Delete"
             className=Styles.removeButton
             onClick={_ => {
               setState(state => {
