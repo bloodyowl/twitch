@@ -7,3 +7,4 @@ lib/
 build/
 src/**/*.mjs
 test/**/*.mjs
+!src/projects/2021-06-06-bindings/Bindings.mjs
