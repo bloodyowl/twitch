@@ -24,6 +24,7 @@ let inject = () =>
   --main-contrast-color: rgba(0, 0, 0, 0.8);
   --main-contrast-background-color: rgba(0, 0, 0, 0.05);
   --main-contrast-accented-background-color: rgba(0, 0, 0, 0.12);
+  --main-link-color: #9146ff;
 }
 
 @media(prefers-color-scheme: dark) {
@@ -34,6 +35,7 @@ let inject = () =>
    --main-contrast-color: rgba(255, 255, 255, 0.6);
    --main-contrast-background-color: rgba(255, 255, 255, 0.05);
    --main-contrast-accented-background-color: rgba(255, 255, 255, 0.124);
+   --main-link-color: #FF46F7;
   }
 }
 
@@ -59,6 +61,14 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1
+}
+
+a {
+  color: var(--main-link-color);
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 input, select, textarea, button, a, [role="button"] {-webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
