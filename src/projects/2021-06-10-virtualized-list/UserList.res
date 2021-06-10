@@ -12,9 +12,14 @@ module UserCard = {
     })
     let name = css({
       "fontWeight": "700",
+      "whiteSpace": "nowrap",
+    })
+    let age = css({
+      "whiteSpace": "nowrap",
     })
     let id = css({
       "opacity": 0.5,
+      "whiteSpace": "nowrap",
     })
   }
   @react.component
@@ -24,7 +29,7 @@ module UserCard = {
       <Spacer width="10px" />
       <div className=Styles.name> {`${user.firstName} ${user.lastName}`->React.string} </div>
       <Spacer width="20px" />
-      <div> {`${user.age->Int.toString} years old`->React.string} </div>
+      <div className=Styles.age> {`${user.age->Int.toString} years old`->React.string} </div>
       <Spacer width="20px" />
       <div className=Styles.id> {user.id->React.string} </div>
     </div>

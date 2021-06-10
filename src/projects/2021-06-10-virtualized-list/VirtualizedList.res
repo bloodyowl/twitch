@@ -13,7 +13,7 @@ module Styles = {
     "alignSelf": "stretch",
   })
   let scrollView = css({
-    "overflowY": "auto",
+    "overflow": "auto",
     "display": "flex",
     "flexDirection": "column",
     "flexGrow": 1,
