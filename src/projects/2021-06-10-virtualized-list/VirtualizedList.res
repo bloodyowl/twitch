@@ -35,6 +35,11 @@ module Styles = {
     "backgroundColor": Theme.mainBackgroundColor,
   })
 }
+
+// Our component can receive any type of data.
+// The `'a` parameter represents something that unknown type, it's called a type parameter (often called a generic).
+// For that reason, not knowing what's inside, we can't hardcode in our components things that assume a given form,
+// That's why we need to pass `render` and `matchesSearch` from the outside, because the caller knows the type.
 @react.component
 let make = (
   ~data: array<(string, 'a)>,
@@ -70,48 +75,67 @@ let make = (
         setSearchInput(_ => value === "" ? None : Some(value))
       }}
     />
+    // We've got an container that we measure (using the ref and useResizeObserver).
+    // That gives us the virtualized list viewport height (kind of the height of a window we're look our list through)
     <div className=Styles.container ref={ReactDOM.Ref.domRef(containerRef)}>
-      {switch dimensions {
-      | Some({height}) =>
-        let startRenderIndex = max(0, (scrollTop - threshold) / rowHeight)
-        let endRenderIndex = min(
-          startRenderIndex + (height + threshold) / rowHeight,
-          data->Array.length,
-        )
-        <div
-          className=Styles.scrollView
-          onScroll={event => {
-            let target = event->ReactEvent.UI.target
-            let scrollTop = target["scrollTop"]
-            setScrollTop(_ => scrollTop)
-          }}>
+      {
+        // Given we need the dimension to know what to render, we wait for the first measurement until we do anything
+        switch dimensions {
+        | Some({height}) =>
+          // That's the index of the first item we need to render.
+          // `threshold` is a little extra space in which we render elements even though
+          // they're not currently visible. It helps us catch up with fast scrolling.
+          // The `max` is so that the lowest index we're getting is 0 (and not -3 given the threshold)
+          let startRenderIndex = max(0, (scrollTop - threshold) / rowHeight)
+          // Same logic there, except it's the last element that needs to be rendered
+          let endRenderIndex = min(
+            startRenderIndex + (height + threshold) / rowHeight,
+            data->Array.length,
+          )
           <div
-            className=Styles.scrollViewContents
-            style={ReactDOM.Style.make(~height=`${totalHeight->Int.toString}px`, ())}>
-            {Belt.Array.range(startRenderIndex, endRenderIndex)
-            ->Belt.Array.keepMap(index => data[index])
-            ->Array.mapWithIndex(((key, user), index) =>
-              <div
-                key
-                style={ReactDOM.Style.make(
-                  ~position="absolute",
-                  ~left="0",
-                  ~right="0",
-                  ~top={
-                    let top = (startRenderIndex + index) * rowHeight
-                    `${top->Int.toString}px`
-                  },
-                  ~height=`${rowHeight->Int.toString}px`,
-                  (),
-                )}>
-                {render(user)}
-              </div>
-            )
-            ->React.array}
+            className=Styles.scrollView
+            onScroll={event => {
+              let target = event->ReactEvent.UI.target
+              let scrollTop = target["scrollTop"]
+              setScrollTop(_ => scrollTop)
+            }}>
+            <div
+              className=Styles.scrollViewContents
+              style={ReactDOM.Style.make(~height=`${totalHeight->Int.toString}px`, ())}>
+              {
+                // Get a small array containing the indexes we'll need to render
+                Belt.Array.range(startRenderIndex, endRenderIndex)
+                // Get the data for each index
+                ->Belt.Array.keepMap(index => data[index])
+                ->Array.mapWithIndex(((key, user), index) =>
+                  // Each element is positionned absolutely, so that it doesn't depend of its previous siblings.
+                  // Given the whole point is about not rendering elements that aren't visible, the previous siblings likely aren't there
+                  // Also: DON'T FORGET TO PASS A KEY HERE
+                  <div
+                    key
+                    style={ReactDOM.Style.make(
+                      ~position="absolute",
+                      ~left="0",
+                      ~right="0",
+                      ~top={
+                        let top = (startRenderIndex + index) * rowHeight
+                        // The element is `startRenderIndex` + the index in this array,
+                        // because the array is a subset of data starting at `startRenderIndex`
+                        `${top->Int.toString}px`
+                      },
+                      ~height=`${rowHeight->Int.toString}px`,
+                      (),
+                    )}>
+                    {render(user)}
+                  </div>
+                )
+                ->React.array
+              }
+            </div>
           </div>
-        </div>
-      | None => React.null
-      }}
+        | None => React.null
+        }
+      }
     </div>
   </div>
 }
