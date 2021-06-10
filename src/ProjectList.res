@@ -5,7 +5,7 @@ let projects = [
     title: "Virtualized list",
     slug: "virtualized-list",
     date: "2021-06-10",
-    render: () => <VirtualizedListProject />,
+    render: () => <UserList />,
   },
   {
     title: "Bindings",
