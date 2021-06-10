@@ -19,7 +19,7 @@ let queryList = () => {
     | #Timeout => Errors.Timeout
     }
   )
-  ->Future.mapResult(({response}) => {
+  ->Future.mapResult(~propagateCancel=true, ({response}) => {
     switch response {
     | Some(response) => Ok(response)
     | None => Error(Errors.EmptyResponse)
