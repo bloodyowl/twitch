@@ -2,6 +2,12 @@ open Project
 
 let projects = [
   {
+    title: "Virtualized list",
+    slug: "virtualized-list",
+    date: "2021-06-10",
+    render: () => <VirtualizedListProject />,
+  },
+  {
     title: "Bindings",
     slug: "bindings",
     date: "2021-06-06",
