@@ -56,7 +56,7 @@ module Comment = {
     Future.make(resolve => {
       let timeoutId = setTimeout(() => {
         resolve(Ok(fakeServerState->MutableMap.String.getWithDefault(postId, [])))
-      }, 300)
+      }, 500)
       Some(() => clearTimeout(timeoutId))
     })
   }

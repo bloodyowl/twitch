@@ -85,8 +85,17 @@ module PostComments = {
     let comments = css({
       "overflowY": "auto",
       "flexGrow": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "transform": "translateZ(0)",
     })
-
+    let loader = css({
+      "display": "flex",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "alignItems": "center",
+      "justifyContent": "center",
+    })
     let comment = css({
       "padding": 10,
     })
@@ -121,7 +130,8 @@ module PostComments = {
       <div className=Styles.comments>
         {switch comments {
         | NotAsked => React.null
-        | Loading => <ActivityIndicator color=Theme.mainBackgroundColor />
+        | Loading =>
+          <div className=Styles.loader> <ActivityIndicator color=Theme.mainContrastColor /> </div>
         | Done(Error(_)) => <ErrorPage text="An error occured loading the image" />
         | Done(Ok(comments)) =>
           comments
