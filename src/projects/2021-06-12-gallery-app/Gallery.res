@@ -77,6 +77,16 @@ module Dialog = {
 module PostComments = {
   module Styles = {
     open Emotion
+    let container = css({
+      "display": "flex",
+      "flexDirection": "column",
+      "flexGrow": 1,
+    })
+    let comments = css({
+      "overflowY": "auto",
+      "flexGrow": 1,
+    })
+
     let comment = css({
       "padding": 10,
     })
@@ -107,22 +117,24 @@ module PostComments = {
       Some(() => request->Future.cancel)
     })
 
-    <div>
-      {switch comments {
-      | NotAsked => React.null
-      | Loading => <ActivityIndicator color=Theme.mainBackgroundColor />
-      | Done(Error(_)) => <ErrorPage text="An error occured loading the image" />
-      | Done(Ok(comments)) =>
-        comments
-        ->Array.map(comment => {
-          <div key=comment.id className=Styles.comment>
-            <strong> {comment.username->React.string} </strong>
-            {" "->React.string}
-            <span> {comment.comment->React.string} </span>
-          </div>
-        })
-        ->React.array
-      }}
+    <div className=Styles.container>
+      <div className=Styles.comments>
+        {switch comments {
+        | NotAsked => React.null
+        | Loading => <ActivityIndicator color=Theme.mainBackgroundColor />
+        | Done(Error(_)) => <ErrorPage text="An error occured loading the image" />
+        | Done(Ok(comments)) =>
+          comments
+          ->Array.map(comment => {
+            <div key=comment.id className=Styles.comment>
+              <strong> {comment.username->React.string} </strong>
+              {` • `->React.string}
+              <span> {comment.comment->React.string} </span>
+            </div>
+          })
+          ->React.array
+        }}
+      </div>
       <input
         className=Styles.input
         type_="text"
@@ -186,6 +198,8 @@ module FullSizePicture = {
     let sidebar = css({
       "width": 300,
       "backgroundColor": Theme.mainBackgroundColor,
+      "display": "flex",
+      "flexDirection": "column",
     })
     let image = css({
       "position": "absolute",
