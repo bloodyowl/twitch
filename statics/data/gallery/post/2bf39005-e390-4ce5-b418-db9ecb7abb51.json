@@ -1,137 +1,14 @@
-[
-  {
-    "id": "a4aeffc4-6e54-443d-83cc-c8365c0c49f6",
-    "image": {
-      "url": "/gallery/large/beach-5526592_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/beach-5526592_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "beach",
-    "likes": 340
+{
+  "id": "2bf39005-e390-4ce5-b418-db9ecb7abb51",
+  "image": {
+    "url": "/gallery/large/coast-6310250_1920.webp",
+    "width": 1920,
+    "height": 1280
   },
-  {
-    "id": "6de00047-06e2-4798-bb87-2840900d24f8",
-    "image": {
-      "url": "/gallery/large/city-5637906_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/city-5637906_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "city",
-    "likes": 335
+  "thumbnail": {
+    "url": "/gallery/small/coast-6310250_1920.webp",
+    "width": 384,
+    "height": 256
   },
-  {
-    "id": "2bf39005-e390-4ce5-b418-db9ecb7abb51",
-    "image": {
-      "url": "/gallery/large/coast-6310250_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/coast-6310250_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "coast",
-    "likes": 244
-  },
-  {
-    "id": "aa692045-5723-48a3-a5bd-2ed92e0ac817",
-    "image": {
-      "url": "/gallery/large/cute-3258931_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/cute-3258931_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "cute",
-    "likes": 730
-  },
-  {
-    "id": "87e47aa1-ecc1-43c9-9643-94d954e40613",
-    "image": {
-      "url": "/gallery/large/flower-6025206_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/flower-6025206_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "flower",
-    "likes": 139
-  },
-  {
-    "id": "6b2b160f-84bc-4e46-9836-bb1a8430dd4c",
-    "image": {
-      "url": "/gallery/large/glow-4701292_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/glow-4701292_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "glow",
-    "likes": 306
-  },
-  {
-    "id": "f84d682d-4ac4-4c62-ae5d-ee24f5dc92d6",
-    "image": {
-      "url": "/gallery/large/highway-5314645_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/highway-5314645_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "highway",
-    "likes": 380
-  },
-  {
-    "id": "c9e0b6d4-f39b-4241-894d-89c5691cffbd",
-    "image": {
-      "url": "/gallery/large/strawberries-6165597_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/strawberries-6165597_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "strawberries",
-    "likes": 310
-  },
-  {
-    "id": "635109b9-fbf3-4193-8eed-24ed72c1799d",
-    "image": {
-      "url": "/gallery/large/tallest-3093955_1920.webp",
-      "width": 1920,
-      "height": 1280
-    },
-    "thumbnail": {
-      "url": "/gallery/small/tallest-3093955_1920.webp",
-      "width": 384,
-      "height": 256
-    },
-    "title": "tallest",
-    "likes": 852
-  }
-]
+  "title": "coast"
+}

@@ -6,8 +6,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "beach",
-    "likes": 340
+    "title": "beach"
   },
   {
     "id": "6de00047-06e2-4798-bb87-2840900d24f8",
@@ -16,8 +15,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "city",
-    "likes": 335
+    "title": "city"
   },
   {
     "id": "2bf39005-e390-4ce5-b418-db9ecb7abb51",
@@ -26,8 +24,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "coast",
-    "likes": 244
+    "title": "coast"
   },
   {
     "id": "aa692045-5723-48a3-a5bd-2ed92e0ac817",
@@ -36,8 +33,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "cute",
-    "likes": 730
+    "title": "cute"
   },
   {
     "id": "87e47aa1-ecc1-43c9-9643-94d954e40613",
@@ -46,8 +42,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "flower",
-    "likes": 139
+    "title": "flower"
   },
   {
     "id": "6b2b160f-84bc-4e46-9836-bb1a8430dd4c",
@@ -56,8 +51,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "glow",
-    "likes": 306
+    "title": "glow"
   },
   {
     "id": "f84d682d-4ac4-4c62-ae5d-ee24f5dc92d6",
@@ -66,8 +60,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "highway",
-    "likes": 380
+    "title": "highway"
   },
   {
     "id": "c9e0b6d4-f39b-4241-894d-89c5691cffbd",
@@ -76,8 +69,7 @@
       "width": 384,
       "height": 256
     },
-    "title": "strawberries",
-    "likes": 310
+    "title": "strawberries"
   },
   {
     "id": "635109b9-fbf3-4193-8eed-24ed72c1799d",
@@ -86,7 +78,6 @@
       "width": 384,
       "height": 256
     },
-    "title": "tallest",
-    "likes": 852
+    "title": "tallest"
   }
 ]
