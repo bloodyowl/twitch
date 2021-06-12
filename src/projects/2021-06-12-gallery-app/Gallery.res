@@ -190,12 +190,11 @@ module FullSizePicture = {
     open Emotion
     let container = css({
       "position": "relative",
-      "alignSelf": "stretch",
-    })
-    let imageContainer = css({
       "width": "100%",
       "maxWidth": 1000,
       "margin": "auto",
+    })
+    let imageContainer = css({
       "display": "flex",
       "flexDirection": "row",
       "alignItems": "stretch",
