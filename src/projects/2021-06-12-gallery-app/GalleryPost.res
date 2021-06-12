@@ -36,7 +36,7 @@ module Detail = {
     Request.make(
       ~url=`/data/gallery/post/${id}.json`,
       ~method=#GET,
-      ~responseType=(JsonAsAny: Request.responseType<array<t>>),
+      ~responseType=(JsonAsAny: Request.responseType<t>),
       (),
     )->RequestUtils.handleErrors
 }
