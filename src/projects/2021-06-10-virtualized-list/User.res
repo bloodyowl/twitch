@@ -12,17 +12,5 @@ let queryList = () => {
     ~method=#GET,
     ~responseType=(JsonAsAny: Request.responseType<array<t>>),
     (),
-  )
-  ->Future.mapError(~propagateCancel=true, error =>
-    switch error {
-    | #NetworkRequestFailed => Errors.NetworkRequestFailed
-    | #Timeout => Errors.Timeout
-    }
-  )
-  ->Future.mapResult(~propagateCancel=true, ({response}) => {
-    switch response {
-    | Some(response) => Ok(response)
-    | None => Error(Errors.EmptyResponse)
-    }
-  })
+  )->RequestUtils.handleErrors
 }
