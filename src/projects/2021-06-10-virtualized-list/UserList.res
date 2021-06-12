@@ -62,8 +62,9 @@ let make = () => {
       render={user => <UserCard user />}
       matchesSearch={(user, search) => {
         let upperCaseSearch = search->String.toUpperCase
-        user.firstName->String.toUpperCase->String.includes(upperCaseSearch) ||
-        user.lastName->String.toUpperCase->String.includes(upperCaseSearch) ||
+        `${user.firstName} ${user.lastName} ${user.firstName}`
+        ->String.toUpperCase
+        ->String.includes(upperCaseSearch) ||
         user.age->Int.toString->String.includes(upperCaseSearch) || (
           idRegex->RegExp.test(search) ? user.id->String.includes(search) : false
         )
