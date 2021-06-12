@@ -6,6 +6,14 @@ module UserCard = {
       "flexDirection": "row",
       "alignItems": "center",
       "padding": "10px",
+      "justifyContent": "space-between",
+    })
+    let group = css({
+      "display": "flex",
+      "flexDirection": "row",
+      "alignItems": "center",
+      "flexGrow": 1,
+      "flexShrink": 1,
     })
     let avatar = css({
       "borderRadius": "100%",
@@ -16,21 +24,37 @@ module UserCard = {
     })
     let age = css({
       "whiteSpace": "nowrap",
+      "textOverflow": "ellipsis",
+      "overflow": "hidden",
+      "width": 1,
+      "flexGrow": 1,
     })
     let id = css({
       "opacity": 0.5,
       "whiteSpace": "nowrap",
+      "width": 1,
+      "textOverflow": "ellipsis",
+      "overflow": "hidden",
+      "flexGrow": 1,
+      "textAlign": "right",
+      "fontFamily": "monospace",
+      "fontSize": 12,
+    })
+    let extensibleSpacer = css({
+      "width": 1,
+      "flexGrow": 1,
     })
   }
   @react.component
   let make = (~user: User.t) => {
     <div className=Styles.container>
-      <img src={user.picture} alt="" width="42" height="42" className=Styles.avatar />
-      <Spacer width="10px" />
-      <div className=Styles.name> {`${user.firstName} ${user.lastName}`->React.string} </div>
-      <Spacer width="20px" />
-      <div className=Styles.age> {`${user.age->Int.toString} years old`->React.string} </div>
-      <Spacer width="20px" />
+      <div className=Styles.group>
+        <img src={user.picture} alt="" width="42" height="42" className=Styles.avatar />
+        <Spacer width="10px" />
+        <div className=Styles.name> {`${user.firstName} ${user.lastName}`->React.string} </div>
+        <Spacer width="20px" />
+        <div className=Styles.age> {`${user.age->Int.toString} years old`->React.string} </div>
+      </div>
       <div className=Styles.id> {user.id->React.string} </div>
     </div>
   }
