@@ -14,7 +14,7 @@ module App = {
       <Head defaultTitle="bldwl" titleTemplate="%s - bldwl" />
       <Header />
       {switch url.path {
-      | list{} => <Hero title=`Bienvenue !` />
+      | list{} => <Hero title=`Welcome!` />
       | list{"discuss"} => <Hero title=`Discussions` />
       | list{"code" as rootPath, ...localPath} =>
         <ProjectListScreen

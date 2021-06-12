@@ -128,7 +128,7 @@ type link = {
 let links = [
   {
     emoji: `👋`,
-    title: `Bienvenue`,
+    title: `Welcome`,
     href: `/`,
   },
   {
