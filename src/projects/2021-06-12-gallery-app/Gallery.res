@@ -88,6 +88,7 @@ module PostComments = {
       "padding": 10,
       "boxSizing": "border-box",
       "width": "100%",
+      "color": "inherit",
     })
   }
 
