@@ -2151,6 +2151,11 @@ rescript-js@^0.5.14:
   dependencies:
     "@ryyppy/rescript-promise" "^2.0.0"
 
+rescript-react-update@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/rescript-react-update/-/rescript-react-update-4.0.0.tgz#3177a06111c259e01a361e06544ba00046f8d606"
+  integrity sha512-loQmljJisy6mVpTUc22s0SXhhRCgZ1RI0EUshhNJQhf5E/5Z1lpVXSkTtEqIEnZxGObeYpShrL8bFgtGOTz4Zw==
+
 rescript-request@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/rescript-request/-/rescript-request-3.0.0.tgz#c43c078e8d279b135440181696806b7ba3b9d810"

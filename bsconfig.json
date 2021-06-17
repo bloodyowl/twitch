@@ -27,7 +27,8 @@
     "rescript-request",
     "rescript-asyncdata",
     "@ryyppy/rescript-promise",
-    "rescript-js"
+    "rescript-js",
+    "rescript-react-update"
   ],
   "bs-dev-dependencies": ["rescript-test"],
   "bsc-flags": [

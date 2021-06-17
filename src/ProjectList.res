@@ -2,6 +2,12 @@ open Project
 
 let projects = [
   {
+    title: "Hooks: React Update demo",
+    slug: "react-update-demo",
+    date: "2021-06-17",
+    render: () => <DemoReactUpdate />,
+  },
+  {
     title: "Gallery app",
     slug: "gallery-app",
     date: "2021-06-12",
