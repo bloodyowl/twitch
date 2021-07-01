@@ -446,6 +446,7 @@ let make = () => {
     {openWindows
     ->Array.map(window =>
       <Window
+        key={window.id}
         window
         onClose={() =>
           setOpenWindows(windows => windows->Array.filter(item => item.id !== window.id))}
