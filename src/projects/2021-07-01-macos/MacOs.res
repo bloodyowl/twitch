@@ -241,6 +241,7 @@ module DockApplicationTooltip = {
       "left": "50%",
       "transform": "translateX(-50%)",
       "backgroundColor": "#333",
+      "color": "#FFF",
       "border": "1px solid #555",
       "padding": "2px 15px",
       "fontSize": 14,
